@@ -1,0 +1,30 @@
+<div class="modal fade" id="uploadImgModal" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Upload Image</h4>
+							</div>
+							<div class="modal-body">
+								<div class="container-fluid ">
+									<div class="row" >
+										<!-- <custom> -->
+										<div class='col-md-12'>
+											<div class="form-group">
+												<input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+											</div>
+										</div>
+										
+											<!-- <custom> -->
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-success" ng-click="uploadFileToServer()" data-dismiss="modal" ng-show="uploadSelected">Upload</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+
+					</div>
+	  			</div>
