@@ -200,7 +200,7 @@ box-shadow: 0 0 5px rgba(89,152,8,1);
  
  
 </head>
-<body ng-app="docsTemplateUrlDirective" ng-controller="Controller">
+<body ng-app="docsTemplateUrlDirective" ng-controller="Controller" ng-init="init()">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
  
@@ -221,6 +221,13 @@ box-shadow: 0 0 5px rgba(89,152,8,1);
 		$scope.hoverIn = function(){
 	        this.hoverEdit = true;
 	    };
+	    $scope.init = function()
+	    {
+	    	console.log("calling the init method");
+	    	$http.get('getCurrentUser').success(function(response){console.log(JSON.stringify(response))});
+	    	
+	    };
+	    
 	    $scope.hoverOut = function(){
 	        this.hoverEdit = false;
 	    };
@@ -233,7 +240,7 @@ box-shadow: 0 0 5px rgba(89,152,8,1);
 		    })
 		    .success(function(data){
 		    	console.log("Success1"+ data["result"]);
-		    	$scope.profilephoto = "photo"+data["result"];
+		    	$scope.profilephoto = "photo1"+data["result"];
 		    	angular.element("input[type='file']").val(null);
 		    	$scope.uploadSelected=false;
 		    }).error(function(){console.log("Error");angular.element("input[type='file']").val(null);$scope.uploadSelected=false;});
