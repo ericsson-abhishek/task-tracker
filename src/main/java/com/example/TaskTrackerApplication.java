@@ -11,7 +11,7 @@ import org.springframework.web.multipart.support.MultipartFilter;
 public class TaskTrackerApplication {
 
 	public static void main(String[] args) {
-		System.out.println("TaskTracker Is starting");
+		System.out.println("TaskTracker Is warming up");
 		SpringApplication.run(TaskTrackerApplication.class, args);
 	}
 	
