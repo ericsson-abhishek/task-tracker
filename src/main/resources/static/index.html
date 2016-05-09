@@ -9,10 +9,11 @@
 <!-- Set the page to the width of the device and set the zoon level -->
 <meta name="viewport" content="width = device-width, initial-scale = 1">
 <title>Task Tracker</title>
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.min.css
-" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css' type='text/css' media='all' />
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
 <style>
 .jumbotron{
     background-color:#2E2D88;
@@ -196,6 +197,26 @@ box-shadow: 0 0 5px rgba(89,152,8,1);
 	height:100px;
 }
 
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+
 </style>
  
  
@@ -203,17 +224,16 @@ box-shadow: 0 0 5px rgba(89,152,8,1);
 <body ng-app="docsTemplateUrlDirective" ng-controller="Controller" ng-init="init()">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
- 
-<!-- Use downloaded version of Bootstrap -->
-
-
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+<script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.js"></script>
 
 <script type="text/javascript">
-	angular.module('docsTemplateUrlDirective', ['ngRoute'])
+	angular.module('docsTemplateUrlDirective', ['ngRoute','angular-loading-bar'])
+	
+	
 	.controller('Controller', ['$scope','$http','$location', function($scope,$http,$location) {
 		$scope.profilephoto="photo";
 		var fd = new FormData();
@@ -227,38 +247,136 @@ box-shadow: 0 0 5px rgba(89,152,8,1);
 	    	$http.get('getCurrentUser').success(function(response){console.log(JSON.stringify(response))});
 	    	
 	    };
+	    $scope.getClassForAttachment=function(attachment)
+	    {
+	    	if(attachment.name.indexOf('doc')>-1)
+	    		{
+	    			return 'fa fa-file-word-o fa-3x'
+	    		}
+	    	else if(attachment.name.indexOf('xls')>-1)
+	    		{
+	    			return 'fa fa-file-excel-o fa-3x'
+	    		}
+	    	else if(attachment.name.indexOf('pdf')>-1)
+	    		{
+	    			return 'fa fa-file-pdf-o fa-3x'
+	    		}
+	    	else if(attachment.type.indexOf('image')>-1)
+	    		{
+	    			return 'fa fa-file-image-o fa-3x'
+	    		}
+	    	else if(attachment.name.indexOf('ppt')>-1)
+    		{
+    			return 'fa fa-file-powerpoint-o fa-3x'
+    		}
+	    	else if((attachment.name.indexOf('zip')>-1)||(attachment.name.indexOf('rar')>-1))
+	    		{
+		    		return 'fa fa-file-archive-o fa-3x'
+	    		}
+	    	
+	    	else
+	    		{
+	    			return 'fa fa-file fa-3x'
+	    		}
+	    	
+	    };
 	    
 	    $scope.hoverOut = function(){
 	        this.hoverEdit = false;
 	    };
 		$scope.uploadFileToServer = function() {
-	    	console.log("upload file to server is invoked"+ fd);
+	    	//console.log("upload file to server is invoked"+ fd);
 		    $http.post('upload', fd, {
 		        withCredentials: true,
 		        headers: {'Content-Type': undefined },
 		        transformRequest: angular.identity
 		    })
 		    .success(function(data){
-		    	console.log("Success1"+ data["result"]);
+		    	//console.log("Success1"+ data["result"]);
 		    	$scope.profilephoto = "photo1"+data["result"];
 		    	angular.element("input[type='file']").val(null);
 		    	$scope.uploadSelected=false;
 		    }).error(function(){console.log("Error");angular.element("input[type='file']").val(null);$scope.uploadSelected=false;});
 	
 		};
+		
+		
+		$scope.uploadCommentToServer = function() {
+			//console.log("Executed comment upload");
+			var fdMul = new FormData();
+			if($scope.commentFiles!=null)
+			{	
+				for(var i=0;i<$scope.commentFiles.length;i++)
+				{	
+					fdMul.append("file",$scope.commentFiles[i]);
+				}
+			}
+			console.log($scope.commentFiles);
+			fdMul.append("taskStartDate",$scope.taskStartDate);
+			fdMul.append("taskDueDate",$scope.taskDueDate);
+			fdMul.append("taskComment",$scope.taskComment);
+			fdMul.append("taskSubject",$scope.taskStartDate);
+			
+			
+			
+			console.log("Start Date"+$scope.taskStartDate);
+	    	//console.log("upload multiple files to server is invoked"+ fdMul);
+		    $http.post('uploadComment', fdMul, {
+		        withCredentials: true,
+		        headers: {'Content-Type': undefined },
+		        transformRequest: angular.identity
+		    })
+		    .success(function(data){
+		    	//console.log("Success1"+ data["result"]);
+		    	$scope.commentFiles=null;
+		    	angular.element("input[type='file']").val(null);
+		    }).error(function(){console.log("Error");angular.element("input[type='file']").val(null);$scope.uploadSelected=false;});
+	
+		};
+		
+		
 	    $scope.uploadFile = function(files) {
 	    	fd.append("file", files[0]);
-	    	console.log("upload file is getting invoked");
+	    	//console.log("upload file is getting invoked");
 	    	$scope.$apply(function(){
 	    		$scope.uploadSelected=true;
 	    	});
 		};
 		
+		
+		$scope.uploadMultipleFiles = function(files) {
+	   		var temp = [];
+			for(var j=0;j<files.length;j++)
+			{
+				temp.push(files[j]);
+			}
+			if($scope.commentFiles!=null)
+			{
+				for(var j=0;j<$scope.commentFiles.length;j++)
+				{
+				temp.push($scope.commentFiles[j]);
+				}
+			}
+			$scope.$apply(function(){
+				$scope.commentFiles = temp;
+			});
+	    	
+		};
+		
+		
 		$scope.showView=function()
 		{
-			console.log('calling show view');
 			$location.url('/view');
 			
+		};
+		
+		$scope.removeUploadedItem=function(element)
+		{
+			for(var i = $scope.commentFiles.length - 1; i >= 0; i--) {
+			    if($scope.commentFiles[i] == element) {
+			    	$scope.commentFiles.splice(i, 1);
+			    }
+			}
 		};
 		
 		
@@ -288,13 +406,26 @@ box-shadow: 0 0 5px rgba(89,152,8,1);
 		    templateUrl: 'upload-img-modal.html'
 		  };
 		})
-		/* .directive('cameraHover', function() {
-		  return {
-		    templateUrl: 'task-header.html'
-		  };
-		}) */
+		// this is a very efficient way to work with angular and Jquery togather
+		// here I have created a tooltip directive to make sure angular calls the Jquery to make the tooltip
+		// appear the way I wanted
+		.directive('tooltip', function(){
+			return {
+		        restrict: 'A',
+		        link: function(scope, element, attrs){
+		            $(element).hover(function(){
+		                // on mouseenter
+		                $(element).tooltip('show');
+		            }, function(){
+		                // on mouseleave
+		                $(element).tooltip('hide');
+		            });
+		        }
+		    };
+		}		
+		
+		)
 		.config(function($routeProvider, $locationProvider) {
-			console.log("Route1");
 			  $routeProvider
 			   .when('/tasks', {
 			    templateUrl: 'task-rows.html',
@@ -309,8 +440,9 @@ box-shadow: 0 0 5px rgba(89,152,8,1);
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
     $('#startDate').datepicker();
+    $('#dueDate').datepicker();
+    $('#showToolTip').tooltip();
     $('#elem').popover();
     console.log("Juery Executed with id");
 });
@@ -318,11 +450,13 @@ $("div").mouseover(function(){
 	console.log("Hover invoked");
 	$("#imageupload").show();
 });
+
 </script>
 
 
 <br/>
 	<div class="container ">
+		
 		<div class="col-md-3 col-lg-2 mycontent-right" >
 			
 			<div left-pane></div>

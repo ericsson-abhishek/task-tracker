@@ -4,35 +4,81 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Modal Header</h4>
+				<h4 class="modal-title">New Task</h4>
 			</div>
 			<div class="modal-body">
 				<div class="container-fluid ">
-					<div class="row">
+				<div class="row">
+					<div class="row" style="padding:10px;">
 						<!-- <custom> -->
-						<div class='col-md-5'>
+						
+						<div class="col-md-12">
+							<input type="text" placeholder="Subject" ng-model="taskSubject"id="subject" name="subject" class="form-control">
+						</div>
+						<!-- <custom> -->
+					</div>
+					<div class="row" style="padding:10px;">
+						<!-- <custom> -->
+						<div class='col-md-6'>
 							<div  id ="startDate" class="input-group date startDate" data-provide="datepicker">
-								<input type="text" class="form-control">
+								<input type="text"  ng-model="taskStartDate" class="form-control" placeholder="Start Date">
 								<div class="input-group-addon">
 									<span class="glyphicon glyphicon-th"></span>
 								</div>
 							</div>
 						</div>
-						<div class='col-md-5'>
-							<div class="form-group">
-								<div class='input-group date' id='datetimepicker7'>
-									<input type='text' class="form-control" /> <span
-										class="input-group-addon"> <span
-										class="glyphicon glyphicon-calendar"></span>
-									</span>
+						<div class='col-md-6'>
+							<div  id ="dueDate" class="input-group date dueDate" data-provide="datepicker">
+								<input type="text" ng-model="taskDueDate" class="form-control" placeholder="Start Date">
+								<div class="input-group-addon">
+									<span class="glyphicon glyphicon-th"></span>
 								</div>
 							</div>
+							
+						</div>
+						
+						<!-- <custom> -->
+					</div>
+					
+					<div class="row" style="padding:10px;">
+						<!-- <custom> -->
+						<div class="col-md-12">
+						
+						<span class="col-xs-2 label label-success" for="comments" >EABCHOU</span>
+						<textarea  class="form-control" id="comments" ng-model="taskComment" placeholder="Add comment..."></textarea>
+						
 						</div>
 						<!-- <custom> -->
 					</div>
+					
+					<div class="row" style="padding:10px;">
+										<!-- <custom> -->
+											<div class="col-md-12">
+											<span class="btn btn-success btn-file">Attach
+												<input type="file" multiple name="files" onchange="angular.element(this).scope().uploadMultipleFiles(this.files)"/>
+											</span>
+											</div>
+										
+											<!-- <custom> -->
+					</div>
+					<div class="row" style="padding:10px;">
+						<DIV class="col-md-12" >
+							<div class=" col-md-2 " style="margin:0px;padding:1px;" ng-repeat="a in commentFiles" >
+							<div  class="thumbnail" data-toggle="tooltip" data-placement="bottom" title={{a.name}} tooltip>
+							<a href="" style="text-decoration: none" ng-click="removeUploadedItem(a)">
+							<span   style="display:block; text-align:right" class="fa fa-times"></span>
+							</a>
+							
+							<i ng-class="getClassForAttachment(a)" style="display:block; text-align:center"></i>
+							<a style="display:block; text-align:center"><small>{{a.name|limitTo:8}}..</small></a>
+							</div>
+							</div>
+						</div>
+					</div>	
 				</div>
 			</div>
 			<div class="modal-footer">
+			<button type="button" class="btn btn-success" ng-click="uploadCommentToServer()" data-dismiss="modal" >Save</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 		</div>

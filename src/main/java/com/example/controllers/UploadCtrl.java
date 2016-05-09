@@ -84,6 +84,32 @@ public class UploadCtrl {
 	        //FileCopyUtils.copy(mFile.getBytes(), file); //This will copy the file to the specific location.
 	    }
 	
+	@RequestMapping(value="/uploadComment", method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody String uploadComment(@RequestParam("file") MultipartFile [] requestFile,@RequestParam(name="comment",required=false)String comment,MultipartHttpServletRequest  request) {
+
+		System.out.println("This method invoked for"+comment);
+		
+	    //org.springframework.web.multipart.MultipartHttpServletRequest
+//	    MultipartHttpServletR equest mRequest;
+//	    mRequest = (MultipartHttpServletRequest) request;
+//
+//	    Iterator<String> itr = mRequest.getFileNames();
+//	    while (itr.hasNext()) {
+//	        //org.springframework.web.multipart.MultipartFile
+//	        MultipartFile mFile = mRequest.getFile(itr.next());
+//	        String fileName = mFile.getOriginalFilename();
+		for(int i=0;i<requestFile.length;i++)
+		{
+			System.out.println("*****"+ requestFile[i].getOriginalFilename());
+		}
+	        String s = System.nanoTime()+"";
+	        return "{\"result\":\""+s+"\"}";
+
+	        //To copy the file to a specific location in machine.
+	        //File file = new File('path/to/new/location');
+	        //FileCopyUtils.copy(mFile.getBytes(), file); //This will copy the file to the specific location.
+	    }
+	
 	
 
 }
