@@ -26,6 +26,16 @@
     border-bottom: 1px solid #ddd;
     padding: 10px;
 }
+
+.input-sm-xs
+{
+	height: 20px;
+	padding: 5px 10px;
+	font-size: 12px;
+	line-height: 1.5;
+	border-radius: 3px;
+}
+
 .nav-tabs {
     margin-bottom: 0;
 }
@@ -108,9 +118,44 @@ div.shadow:hover {
 	}*/
 
 div.shadow:hover {
--moz-box-shadow: 0 0 5px rgba(89,152,8,1);
+/* -moz-box-shadow: 0 0 5px rgba(89,152,8,1);
 -webkit-box-shadow: 0 0 5px rgba(89,152,8,1);
-box-shadow: 0 0 5px rgba(89,152,8,1);
+box-shadow: 0 0 5px rgba(89,152,8,1); */
+
+background:rgba(222,223,232,0.37);
+-moz-box-shadow: 0 0 4px rgba(154,163,244,0.65);
+-webkit-box-shadow: 0 0 4px rgba(154,163,244,0.65);
+box-shadow: 0 0 4px rgba(154,163,244,0.65);
+/* border: 1px solid #ccc; */
+
+}
+
+div.selected {
+/* -moz-box-shadow: 0 0 5px rgba(89,152,8,1);
+-webkit-box-shadow: 0 0 5px rgba(89,152,8,1); */
+ /* box-shadow: 0 0 5px rgba(89,152,8,1); */ 
+ margin:5px;
+padding: 5px;
+background:rgba(222,223,232,0.37);
+-moz-box-shadow: 0 0 2px rgba(154,163,244,0.65);
+-webkit-box-shadow: 0 0 2px rgba(154,163,244,0.65);
+box-shadow: 0 0 2px rgba(154,163,244,0.65);
+border: 1px solid #ccc;
+
+}
+
+div.taskview {
+/* -moz-box-shadow: 0 0 5px rgba(89,152,8,1);
+-webkit-box-shadow: 0 0 5px rgba(89,152,8,1); */
+ /* box-shadow: 0 0 5px rgba(89,152,8,1); */ 
+/*  margin:5px;*/
+padding: 5px; 
+background:rgba(222,223,232,0.37);
+-moz-box-shadow: 0 0 2px rgba(154,163,244,0.65);
+-webkit-box-shadow: 0 0 2px rgba(154,163,244,0.65);
+box-shadow: 0 0 2px rgba(154,163,244,0.65);
+border: 1px solid #ccc;
+
 }
 
 .rounded-icon {
@@ -216,6 +261,33 @@ box-shadow: 0 0 5px rgba(89,152,8,1);
         cursor: inherit;
         display: block;
     }
+    
+    .scrollbox {
+    overflow: auto;  /* Start writing your markup with this style */
+   /*  width: 315px; */   /* The dimensions of your content pane */
+   
+    /* border: 1px solid #b7b7b7; */
+     padding: 5px;
+    /*  margin-top:-8px;
+     margin-bottom:80px;
+     padding-bottom:110px; */
+}
+
+.vertical-track {
+    width: 8px;              /* The width of the scrollbar */
+    background-color: #ccc;   /* The color of the scrollbar track*/
+}
+
+.vertical-handle {
+    width: 100%;
+    background-color: #aaa; /* The color of the scrollbar handle */
+}
+
+.panel-default > .panel-heading-custom{
+  background-image: none;
+  background-color: #000000;
+  color: #ffffff;
+}
 
 </style>
  
@@ -227,6 +299,8 @@ box-shadow: 0 0 5px rgba(89,152,8,1);
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+<script src="http://enscrollplugin.com/releases/enscroll-0.6.1.min.js"></script>
+
 <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.js"></script>
 
@@ -235,6 +309,25 @@ box-shadow: 0 0 5px rgba(89,152,8,1);
 	
 	
 	.controller('Controller', ['$scope','$http','$location', function($scope,$http,$location) {
+		$scope.tasklist = [
+		               { "id" : 1,"name" : "tomato", "categoryId" : 20},
+		               { "id" : 2,"name" : "potato", "categoryId" : 20},
+		               { "id" : 3,"name" : "orange", "categoryId" : 30},
+		               { "id" : 4,"name" : "apple", "categoryId" : 30},
+		               { "id" : 5,"name" : "onion", "categoryId" : 20},
+		               { "id" : 6,"name" : "bringle", "categoryId" : 20},
+		               { "id" : 7,"name" : "onion", "categoryId" : 20},
+		               { "id" : 8,"name" : "onion", "categoryId" : 20},
+		               { "id" : 9,"name" : "onion", "categoryId" : 20},
+		               { "id" : 10,"name" : "onion", "categoryId" : 20}];
+		
+		
+		$scope.select= function(item) {
+	        $scope.selected = item; 
+		 };
+		 $scope.isSelected = function(item) {
+	        return $scope.selected === item;
+		 };
 		$scope.profilephoto="photo";
 		var fd = new FormData();
 		console.log('controller invoked');
@@ -425,6 +518,16 @@ box-shadow: 0 0 5px rgba(89,152,8,1);
 		}		
 		
 		)
+		.directive('scrollbox', function(){
+			return {
+		        restrict: 'A',
+		        link: function(scope, element, attrs){
+		        	 $('.scrollbox').enscroll();
+		        }
+		    };
+		}		
+		
+		)
 		.config(function($routeProvider, $locationProvider) {
 			  $routeProvider
 			   .when('/tasks', {
@@ -445,6 +548,7 @@ $(document).ready(function(){
     $('#showToolTip').tooltip();
     $('#elem').popover();
     console.log("Juery Executed with id");
+    
 });
 $("div").mouseover(function(){
 	console.log("Hover invoked");
@@ -454,15 +558,16 @@ $("div").mouseover(function(){
 </script>
 
 
+
 <br/>
-	<div class="container ">
+	<div class="container-fluid ">
 		
-		<div class="col-md-3 col-lg-2 mycontent-right" >
+		<div class="col-md-2 col-sm-3 col-xs-12 col-lg-2 mycontent-right" >
 			
 			<div left-pane></div>
 			<div upload-img-modal></div>
 		</div>
-		<div class="col-md-9 col-lg-10 mycontent-left" >
+		<div class="col-md-10  col-sm-9 col-xs-12  col-lg-10 mycontent-left" >
 			<div task-header></div>
 
 			<!-- MODAL START -->

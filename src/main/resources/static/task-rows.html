@@ -1,129 +1,161 @@
 <div class="row ">
-				<div class=" list-group col-md-12 col-lg-12" >
-			  				
-			  					<div  class=" list-group-item shadow">
-			  						<div class="row vertical-align">
-			  							<div class=" col-lg-1 col-md-1">
-			  								<img src="http://placehold.it/40x40" id="profileimage" alt="Responsive image">
-			  							</div>
-			  							<div class="col-lg-4 col-md-4">
-			  								<div class="row ">
+	<div class=" list-group col-md-6 col-lg-6 "
+		style="border-right: 1px solid #ddd;">
+		<!-- Since the double click can not be simulated in the hand held devices this div would only be visible in Large devices  -->
+		<div  ng-repeat="task in tasklist" class="visible-lg list-group-item  shadow "
+			ng-dblclick="showView()" id="{{task.id}}" ng-click="select(task.id)"
+			ng-class="{selected :isSelected(task.id)}">
+			<div class="row ">
 
-			  									<div class="col-lg-12 pull-left" style="margin-left:0;padding-left:0;">
-			  										<span style="margin-right:10px;">Complete The task</span>
-													<label class="label label-default" style="margin-left:0;">KDDI</label>
-			  									</div>
-												<!-- <div class="col-lg-4 pull-left" style="margin-left:0;padding-left:0;"> -->
-													
-												<!-- </div> -->
-											</div>	
-												<div class=" row text-muted"><small> by Santosh</small></div>
-			  							</div>
-			  							<div class="col-lg-6 col-md-6 mycontent-right " style="text-align:right">
-			  								<div class="row progress no-gutters rounded-icon" data-toggle="tooltip" data-placement="top" title="70% completed" tooltip> 
-			  								
- 												<div class="progress-bar"style="width:70%">
-    											</div> 
-											</div>
-											<!-- </div> -->
-											<span class="fa fa-bookmark  text-danger pull-right rounded-icon" style="font-size:20px;"></span>
-			  							</div>
-			  							<div class="col-lg-2 col-md-2" style="text-align:left">
-			  								
-											<!-- <button type="button " class="btn btn-xs btn-success pull-right">
-  													Open&nbsp;<span class="fa fa-play"></span>
-											</button> -->
-			  								<button type="button" class="btn btn-success btn-sm" ng-click="showView()"><i class="fa fa-play"></i>&nbsp;View</button> 
-			  								
-			  								<!-- <span class="fa fa-chevron-right pull-right text-success" style="font-size:30px"></span> -->
-			  							</div>
-			  						<!-- <span class="label label-default label-pill pull-right">14</span> -->
-			  						</div>
-			  					</div>
-			  				
-			  
-			 		  <!-- Add drop down menu -->
-					 	
-						  
-			  					<div  class=" list-group-item shadow">
-			  						<div class="row vertical-align">
-			  							<div class=" col-lg-1">
-			  								<img src="http://placehold.it/40x40" id="profileimage" alt="Responsive image">
-			  							</div>
-			  							<div class="col-lg-4">
-			  								<div class="row ">
+				<div class="col-lg-12 col-md-12 col-xs-12">
+					<div class="row " style="padding-left: 5px">
 
-			  									<div class="col-lg-12 pull-left" style="margin-left:0;padding-left:0;">
-			  										<span style="margin-right:10px;">Think about the design</span>
-													<label class="label label-default" style="margin-left:0;">Motorola</label>
-			  									</div>
-												<!-- <div class="col-lg-4 pull-left" style="margin-left:0;padding-left:0;"> -->
-													
-												<!-- </div> -->
-											</div>	
-												<div class=" row text-muted"><small> by Santosh</small></div>
-			  							</div>
-			  							<div class="col-lg-6 mycontent-right " style="text-align:right">
-			  								<div class="row progress no-gutters rounded-icon"> 
-			  								
- 												<div class="progress-bar "style="width:10% ;background-color: orange !important">
-    											</div> 
-											</div>
-											<!-- </div> -->
-											<span class="fa fa-bookmark  text-info pull-right rounded-icon" style="font-size:20px;"></span>
-			  							</div>
-			  							<div class="col-lg-2" style="text-align:left">
-			  								
-											<!-- <button type="button " class="btn btn-xs btn-success pull-right">
-  													Open&nbsp;<span class="fa fa-play"></span>
-											</button> -->
-			  								<button type="button" class="btn btn-success btn-sm" ng-click="showView()"><i class="fa fa-play"></i>&nbsp;View</button> 
-			  								
-			  								<!-- <span class="fa fa-chevron-right pull-right text-success" style="font-size:30px"></span> -->
-			  							</div>
-			  						<!-- <span class="label label-default label-pill pull-right">14</span> -->
-			  						</div>
-			  					</div>
-								<div  class=" list-group-item shadow">
-			  						<div class="row vertical-align">
-			  							<div class=" col-lg-1">
-			  								<img src="http://placehold.it/40x40" id="profileimage" alt="Responsive image">
-			  							</div>
-			  							<div class="col-lg-4">
-			  								<div class="row ">
-
-			  									<div class="col-lg-12 pull-left" style="margin-left:0;padding-left:0;">
-			  										<span style="margin-right:10px;">Complete The task</span>
-													<label class="label label-default" style="margin-left:0;">KDDI</label>
-			  									</div>
-												<!-- <div class="col-lg-4 pull-left" style="margin-left:0;padding-left:0;"> -->
-													
-												<!-- </div> -->
-											</div>	
-												<div class=" row text-muted"><small> by Santosh</small></div>
-			  							</div>
-			  							<div class="col-lg-6 mycontent-right " style="text-align:right">
-			  								<div class="row progress no-gutters rounded-icon"> 
-			  								
- 												<div class="progress-bar"style="width:70%">
-    											</div> 
-											</div>
-											<!-- </div> -->
-											<span class="fa fa-bookmark  text-warning pull-right rounded-icon" style="font-size:20px;"></span>
-			  							</div>
-			  							<div class="col-lg-2" style="text-align:left">
-			  								
-											<!-- <button type="button " class="btn btn-xs btn-success pull-right">
-  													Open&nbsp;<span class="fa fa-play"></span>
-											</button> -->
-			  								<button type="button" class="btn btn-success btn-sm" ng-click="showView()"><i class="fa fa-play"></i>&nbsp;View</button> 
-			  								
-			  								<!-- <span class="fa fa-chevron-right pull-right text-success" style="font-size:30px"></span> -->
-			  							</div>
-			  						<!-- <span class="label label-default label-pill pull-right">14</span> -->
-			  						</div>
-			  					</div>
-			  				
-			  				
+						<div class="col-lg-12" style="margin-left: 0; padding-left: 0;">
+							<div class="col-lg-4 col-xs-4">
+								<span style="margin-right: 10px; font-size: 12px;">Complete
+									The task</span>
+							</div>
+							<div class="col-lg-2 col-xs-2">
+								<label class="label label-default" style="margin-left: 0;">KDDI</label>
+							</div>
+							<div class="col-lg-3 col-xs-3">
+								<small class="pull-right"> by Santosh</small>
+							</div>
+						</div>
 					</div>
+				</div>
 			</div>
+		</div>
+		<!-- the following div would only be rendered in the devices with small screen sizes  -->
+		<div  ng-repeat="task in tasklist" class=" list-group-item  shadow hidden-lg  hidden-xl"
+			ng-click="showView()" 
+			id="{{task.id}}" >
+			<!-- ng-click="select(task.id)"
+			ng-class="{selected :isSelected(task.id)}" -->
+			
+			<div class="row ">
+
+				<div class="col-lg-12 col-md-12">
+					<div class="row " style="padding-left: 5px">
+
+						<div class="col-lg-12" style="margin-left: 0; padding-left: 0;">
+							<div class="col-lg-4 col-xs-8">
+								<span style="margin-right: 10px; font-size: 12px;">Complete
+									The task</span>
+							</div>
+							<div class="col-lg-2 col-xs-2 hidden-xs">
+								<label class="label label-default" style="margin-left: 0;">KDDI</label>
+							</div>
+							<div class="col-lg-3 col-xs-4">
+								<small class="pull-right"> by Santosh</small>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class=" list-group col-md-6 col-lg-6 visible-lg visible-xl">
+		<div class=" list-group-item " style="padding: 0px;">
+			<div class="row " style="margin: 0px 10px -10px 10px;">
+				<div class="panel panel-default">
+					<!-- <div class="panel-heading col-lg-3"> with panel-primary class</div>
+			     	<div class="panel-heading col-lg-3"> panel-primary class</div>
+			     	<div class="panel-heading col-lg-3">Panel with </div> -->
+					<div class="panel-heading panel-heading-custom">
+						<div class=" col-lg-10" style="font-size: 12px; padding-left: 5px;">
+							<!-- <span class="label label-sm label-default"> -->
+							Complete The task
+							<!-- </span> -->
+						</div>
+						<!-- <div class=" col-lg-5" style="font-size: 12px; padding-left: 5px;">
+							<span class="label label-sm label-default">
+							Created By:Santosh K Srivastava
+							</span>
+						</div> -->
+						<div class=" col-lg-2" style="font-size: 12px; padding-left: 5px;padding-right: 0px;">
+							<span class="label label-sm  pull-right"  style="font-size: 10px;color:#000000;background-color:#ffffff; padding-right: 5px;padding-left:5px;padding-bottom:1px;">
+							KDDI
+							</span>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="panel-body"
+						style="padding-top: 10px; padding-bottom: 5px;">
+						<div class=" col-lg-4" style="padding-left: 0px;padding-right: 0px;">
+							<div id="dueDate" class="input-group  date dueDate"
+								data-provide="datepicker">
+								<input type="text" ng-model=dueDate
+									class="form-control input-sm" placeholder="Due Date">
+								<div class="input-group-addon">
+									<span class="glyphicon glyphicon-th"></span>
+								</div>
+							</div>
+						</div>
+						<div class=" col-lg-4" style="padding-left: 5px;padding-right: 0px;">
+							<!-- <div id="dueDate" class="input-group date dueDate"
+								data-provide="datepicker"> -->
+								<input type="text" ng-model="priority"
+									class="form-control input-sm" placeholder="Priority">
+								<!-- <div class="input-group-addon">
+									<span class="glyphicon glyphicon-th"></span>
+								</div>
+							</div> -->
+						</div>
+						<div class=" col-lg-4" style="padding-left: 5px;padding-right: 0px;">
+							<!-- <div id="dueDate" class="input-group date dueDate"
+								data-provide="datepicker"> -->
+								<input type="text" ng-model="status"
+									class="form-control input-sm" placeholder="Status">
+								<!-- <div class="input-group-addon">
+									<span class="glyphicon glyphicon-th"></span>
+								</div>
+							</div> -->
+						</div>
+						<!-- <div class=" col-lg-4">Project ID: KDDI </div>
+			     	<div class="clearfix" ></div> -->
+					</div>
+					<div class="panel-body"
+						style="padding-top: 3px; padding-bottom: 3px;">
+						<div class="col-lg-12"
+							style="padding-left: 0px; padding-right: 0px;">
+							<!-- <span class="col-xs-2 label label-success" for="comments">EABCHOU</span> -->
+							<textarea class="form-control" id="comments"
+								ng-model="taskComment" placeholder="Add comment..."></textarea>
+						</div>
+					</div>
+					<div class="panel-body"
+						style="padding-top: 3px; padding-bottom: 3px;">
+						<div class="col-lg-8 col-lg-offset-4" style="padding-right:0px">
+
+							<span class="btn btn-primary btn-sm btn-file pull-right"
+								style="margin-left: 5px;">Save Changes... <input
+								type="file" multiple name="files"
+								onchange="angular.element(this).scope().uploadMultipleFiles(this.files)" />
+							</span> <span class="btn btn-default btn-sm btn-file pull-right">Attach
+								Files... <input type="file" multiple name="files"
+								onchange="angular.element(this).scope().uploadMultipleFiles(this.files)" />
+							</span>
+						</div>
+					</div>
+					<DIV class="pannel-body col-lg-12" style=" padding-top: 10px; padding-bottom:40px;">
+					<div class=" col-lg-2  " style="margin: 0px; padding: 0px;"	ng-repeat="a in commentFiles">
+						<div class="thumbnail" data-toggle="tooltip" style="margin: 0px; padding: 0px;"	
+							data-placement="bottom" title={{a.name}} tooltip>
+							<a href="" style="text-decoration: none "
+								ng-click="removeUploadedItem(a)"> <span
+								style="display: block; text-align: right" class="fa fa-times"></span>
+							</a> <i ng-class="getClassForAttachment(a)"
+								style="display: block; text-align: center"></i> <a
+								style="display: block; text-align: center; font-size:10px">{{a.name|limitTo:7}}..</a>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

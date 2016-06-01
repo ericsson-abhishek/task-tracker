@@ -1,35 +1,38 @@
 <div class="classWithPad ">
-				<div class="row ">
-					<div class="pull-right">
+				<div class="row " style="max-height:100px">
+					<!-- <div class="pull-right">
 					<a href="j_spring_security_logout">
-    						<!-- style="font-size:25px;margin:0;padding:0;" -->
+    						style="font-size:25px;margin:0;padding:0;"
     						<span class="glyphicon glyphicon-log-out" style="font-size:15px; color:gray"></span>
   							</a>
 					
 					
-					</div> 
-					<div class=" camera-relative col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-class="{'darken':hoverEdit}">
+					</div> --> 
+					<div style="max-width:180px;margin:0 auto;" ng-class="{'darken':hoverEdit}">
 							
 							<img ng-src="{{profilephoto}}"id="profileimage" class="img-thumbnail img-circle ctn " alt="Responsive image" ng-mouseenter="hoverIn()" ng-mouseleave="hoverOut()">
 						
-							<button style="font-size:25px;margin:0;padding:0;"   ng-class="{'darken': hoverEdit}" ng-mouseenter="hoverIn()" ng-mouseleave="hoverOut()" ng-show="hoverEdit" id="imageupload" class="btn btn-default btn-md btn-link"  data-toggle="modal" data-target="#uploadImgModal">
-    						<!-- style="font-size:25px;margin:0;padding:0;" -->
+							<button style="position:absolute;font-size:25px;top:30px;margin-left:75px;padding:0px;"  ng-class="{'darken': hoverEdit}" ng-mouseenter="hoverIn()" ng-mouseleave="hoverOut()" ng-show="hoverEdit" id="imageupload" class="btn btn-default btn-md btn-link"  data-toggle="modal" data-target="#uploadImgModal">
     						<span class="fa fa-camera "></span>
   							</button>
+  							<!-- <button style="position:absolute;font-size:25px;top:30px;margin:0 auto;padding:0px;"  ng-class="{'darken': hoverEdit}" ng-mouseenter="hoverIn()" ng-mouseleave="hoverOut()" ng-show="hoverEdit" id="imageupload" class="btn btn-default btn-md btn-link"  data-toggle="modal" data-target="#uploadImgModal">
+    						<span class="fa fa-camera "></span>
+  							</button> -->
   							
-						
 					</div>
-					<div class="pull-left">
-						<h4 class="text-center"> Abhsihek Choudhury	</h4>
-						<p class="text-center"> Solution Architect	</p>
+					</div>
+					<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<h5 class="text-center"> Abhsihek Choudhury	</h5>
+						<h6 class="text-center"> Solution Architect	</h6>
 						
 					</div>
 					
-				</div>
+					</div>
 				<div class="row">
 					<hr>
 				</div>
-				<div class="row">	
+				<div class="row visible-lg visible-xl visible-md">	
 					<ul class="nav nav-pills nav-stacked">
 			  			<li class="active"><a href="#">All Tasks</a></li>
 			  			
