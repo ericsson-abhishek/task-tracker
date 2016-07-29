@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.rest.core.annotation.RestResource;
+
 /**
  * Entity implementation class for Entity: User
  *
@@ -83,16 +85,19 @@ public class User implements Serializable {
 	 * roles; }
 	 */
 
+	@RestResource(exported=false)
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<UserRole> roles = new ArrayList<UserRole>();
 
+	@RestResource(exported=false)
 	public List<UserRole> getAllroles() {
 		return roles;
 	}
 	
+	@RestResource(exported=false)
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<UserTask> tasks = new ArrayList<UserTask>();
-
+	@RestResource(exported=false)
 	public List<UserTask> getTasks() {
 		return tasks;
 	}

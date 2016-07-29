@@ -1,29 +1,30 @@
 package com.example;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Date;
-import java.util.stream.IntStream;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
 
-import org.bson.types.ObjectId;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.example.models.nosql.CommentDocument;
 import com.example.repos.CommentDocumentRepo;
 import com.example.repos.ProjectRepo;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.data.mongodb.gridfs.GridFsCriteria;
-import org.springframework.data.mongodb.gridfs.GridFsTemplate;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = TaskTrackerApplication.class)
@@ -40,7 +41,28 @@ public class TaskTrackerApplicationTests {
 	MongoOperations operations;
 	@Autowired
 	GridFsTemplate gridFsTemplate;
+	
+	@PersistenceContext
+	EntityManager em;
 
+	@Test
+	public void testNamedQuery()
+	{
+		System.out.println(em);
+		javax.persistence.Query q= em.createQuery("Select u from User u where u.signum='eabchou'");
+		q.getResultList();
+		
+		ConcurrentHashMap<String, FutureTask<String>> cache = new ConcurrentHashMap<>();
+		FutureTask<String> futureT = new FutureTask<String>(new Callable<String>() {
+
+			@Override
+			public String call() throws Exception {
+				// TODO Auto-generated method stub
+				return "Abhishek";
+			}
+		});
+		
+	}
 	@Test
 	public void testAllProjects() {
 

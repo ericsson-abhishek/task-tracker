@@ -2,7 +2,6 @@ package com.example.controllers;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
@@ -12,7 +11,6 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
 public class UploadCtrl {
@@ -45,7 +46,7 @@ public class UploadCtrl {
 	}
 	
 	
-	@RequestMapping("/getCurrentUser")
+	@RequestMapping(path="/getCurrentUser",method=RequestMethod.GET)
 	public Map<String, String> getUserName()
 	{
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -60,9 +61,12 @@ public class UploadCtrl {
 			 return Collections.singletonMap("name","none");
 		}
 	}
-	
-	@RequestMapping(value="/upload", method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody String upload(@RequestParam("file") MultipartFile requestFile,MultipartHttpServletRequest  request) {
+	@ApiOperation("This Method is used to upload User's profile picture")
+	@RequestMapping(value="/uploadProfilePic", method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody String upload(
+			@ApiParam("requestFile expects a multipart file request")
+			@RequestParam("file") MultipartFile requestFile,
+			MultipartHttpServletRequest  request) {
 
 		System.out.println("This method invoked");
 		
